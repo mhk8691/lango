@@ -1,7 +1,6 @@
-export type InteractiveOption = {
-  id: string;
-  text: string;
-};
+import type { ExerciseOption } from "../shared/types";
+
+export type InteractiveOption = ExerciseOption;
 
 export type InteractiveQuestion = {
   id: string;
