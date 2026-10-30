@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:hosting": "next build && node scripts/prepare-hosting.mjs"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
