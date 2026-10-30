@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import "@fontsource/roboto/latin-300.css";
+import "@fontsource/roboto/latin-400.css";
+import "@fontsource/roboto/latin-500.css";
+import "@fontsource/roboto/latin-600.css";
+import "@fontsource/roboto/latin-700.css";
+import "@fontsource/roboto/latin-800.css";
+import Providers from "./providers";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const mikhak = localFont({
+  src: [
+    { path: "./fonts/pershian/Mikhak-Light.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/pershian/Mikhak-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/pershian/Mikhak-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/pershian/Mikhak-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/pershian/Mikhak-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-mikhak",
+  display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -20,10 +30,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="fa"
+      dir="rtl"
+      className={`${mikhak.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
