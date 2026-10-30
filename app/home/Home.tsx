@@ -39,6 +39,7 @@ export default function Home() {
             <Button component={Link} href="/course" variant="outlined">دوره‌های آموزشی</Button>
             <Button component={Link} href="/favorites" variant="outlined">علاقه‌مندی‌ها</Button>
             <Button component={Link} href="/learning-path" variant="outlined">مسیر یادگیری من</Button>
+            <Button component={Link} href="/tests" variant="outlined">آزمون‌های زبان</Button>
             <Button component={Link} href="/onboarding" endIcon={<ArrowBackRounded sx={{ mr: 1 }} />}>مرور معرفی لنگو</Button>
           </Stack>
         </Paper>
