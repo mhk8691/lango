@@ -48,14 +48,14 @@ function Sidebar({ mobile, onNavigate }: { mobile?: boolean; onNavigate: () => v
 export default function DashboardShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const desktop = useMediaQuery("(min-width:1200px)");
-  return <Box dir="ltr" sx={{ minHeight: "100dvh", bgcolor: "#f1f7ff", display: "flex" }}>
+  return <Box dir="rtl" sx={{ minHeight: "100dvh", bgcolor: "#f1f7ff", display: "flex" }}>
     <Box component="a" href="#dashboard-content" sx={{ position: "fixed", top: 8, left: 8, zIndex: 1500, transform: "translateY(-200%)", bgcolor: "#fff", p: 1.5, borderRadius: 2, "&:focus": { transform: "none" } }}>رفتن به محتوای صفحه</Box>
     <Box component="aside" aria-label="سایدبار داشبورد" sx={{ display: { xs: "none", lg: "block" }, width: 240, p: 1, height: "100dvh", position: "sticky", top: 0, flexShrink: 0 }}><Sidebar onNavigate={() => {}} /></Box>
-    {/* Drawer motion uses a physical left edge; Persian text retains its RTL direction. */}
-    <RtlProvider value={false}><Drawer anchor="left" open={open && !desktop} onClose={() => setOpen(false)} sx={{ display: { lg: "none" } }} slotProps={{ paper: { id: "dashboard-mobile-navigation", "aria-label": "منوی داشبورد", sx: { width: 280, maxWidth: "calc(100vw - 32px)", height: "100dvh", bgcolor: "#fff" } } }}><Sidebar mobile onNavigate={() => setOpen(false)} /></Drawer></RtlProvider>
-    <Box dir="rtl" sx={{ flex: 1, minWidth: 0, px: { xs: 1, sm: 2, xl: 2.5 }, pt: 1, pb: 2 }}>
+    {/* Drawer motion uses a physical right edge; Persian text retains its RTL direction. */}
+    <RtlProvider value={false}><Drawer anchor="right" open={open && !desktop} onClose={() => setOpen(false)} sx={{ display: { lg: "none" } }} slotProps={{ paper: { id: "dashboard-mobile-navigation", "aria-label": "منوی داشبورد", sx: { width: 280, maxWidth: "calc(100vw - 32px)", height: "100dvh", bgcolor: "#fff" } } }}><Sidebar mobile onNavigate={() => setOpen(false)} /></Drawer></RtlProvider>
+    <Box dir="rtl" sx={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, px: { xs: 1, sm: 2, xl: 2.5 }, pt: 1, pb: 2 }}>
       <DashboardNavbar onMenuOpen={() => setOpen(true)} />
-      <Box id="dashboard-content" tabIndex={-1} sx={{ outline: "none", "& > main": { minHeight: "calc(100dvh - 110px)", background: "transparent", py: 0 }, "& > main > .MuiContainer-root": { maxWidth: "100%", px: 0 } }}>{children}</Box>
+      <Box id="dashboard-content" tabIndex={-1} sx={{ flex: 1, display: "flex", flexDirection: "column", outline: "none", "& > main[data-dashboard-fill]": { minHeight: 0, flex: 1, alignItems: "stretch" }, "& > main[data-dashboard-fill] > .MuiContainer-root": { flex: 1, display: "flex", minWidth: 0 }, "& > main[data-dashboard-fill] > .MuiContainer-root > .MuiPaper-root": { flex: 1, width: "100%", minWidth: 0 }, "& > main": { minHeight: "calc(100dvh - 110px)", background: "transparent", py: 0 }, "& > main > .MuiContainer-root": { maxWidth: "100%", px: 0 } }}>{children}</Box>
     </Box>
   </Box>;
 }

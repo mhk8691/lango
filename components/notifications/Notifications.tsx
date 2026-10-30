@@ -24,7 +24,7 @@ export default function Notifications({ items }: { items: readonly NotificationI
   const [selected, setSelected] = useState<NotificationItem | null>(null);
   const visible = category === "all" ? items : items.filter(item => item.category === category);
   return (
-    <Box component="main" sx={{ minHeight: "100svh", display: "flex", alignItems: "center", py: { xs: 2, sm: 4, lg: 6 }, background: "radial-gradient(ellipse at 15% 15%, #c7e5ff 0%, transparent 48%), radial-gradient(ellipse at 90% 85%, #c8e8ff 0%, transparent 45%), #9dcdff" }}>
+    <Box component="main" data-dashboard-fill sx={{ minHeight: "100svh", display: "flex", alignItems: "center", py: { xs: 2, sm: 4, lg: 6 }, background: "radial-gradient(ellipse at 15% 15%, #c7e5ff 0%, transparent 48%), radial-gradient(ellipse at 90% 85%, #c8e8ff 0%, transparent 45%), #9dcdff" }}>
       <Container maxWidth={false} sx={{ maxWidth: { xs: 490, sm: 740, md: 960 }, px: { xs: 1.5, sm: 3 } }}>
         <Paper elevation={0} sx={{ minHeight: { xs: 450, sm: 540, md: 590 }, border: "5px solid #e7f3ff", borderRadius: { xs: "24px", md: "32px" }, px: { xs: 1.5, sm: 3, md: 4 }, pt: 1.5, pb: 3, background: "linear-gradient(180deg,#fff 65%,#fbfdff)", boxShadow: "0 24px 80px #1a6cba20" }}>
           <Stack component="header" direction="row" sx={{ justifyContent: "space-between", alignItems: "center", mb: 2 }}>

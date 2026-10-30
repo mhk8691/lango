@@ -14,7 +14,7 @@ test('active sections handle drills and only one sidebar entry per section',()=>
  assert.equal(activeDashboardItem('/dashboard/courses/1'),'courses');
  assert.equal(activeDashboardItem('/dashboard/lesson'),'courses');
  assert.equal(activeDashboardItem('/dashboard/exam/placement'),'tests');
- assert.equal(activeDashboardItem('/dashboard/exam/speaking'),'speaking');
+ assert.equal(activeDashboardItem('/dashboard/exam/speaking'),'tests');
  assert.equal(activeDashboardItem('/dashboard/exam/vocabulary'),'tests');
  assert.equal(activeDashboardItem('/dashboard/profile/edit'),'settings');
  assert.equal(activeDashboardItem('/dashboard/exercises/listening'),'exercises');

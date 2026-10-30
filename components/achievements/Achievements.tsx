@@ -12,7 +12,7 @@ export default function Achievements({ items }: { items: readonly Achievement[] 
   const [expanded, setExpanded] = useState(false);
   const [selected, setSelected] = useState<Achievement | null>(null);
   const visible = expanded ? items : items.slice(0, 6);
-  return <Box component="main" sx={{ minHeight: "100svh", display: "flex", alignItems: "center", py: { xs: 2, sm: 4, lg: 6 }, background: "radial-gradient(ellipse at 15% 15%, #c7e5ff 0%, transparent 48%), radial-gradient(ellipse at 90% 85%, #c8e8ff 0%, transparent 45%), #9dcdff" }}>
+  return <Box component="main" data-dashboard-fill sx={{ minHeight: "100svh", display: "flex", alignItems: "center", py: { xs: 2, sm: 4, lg: 6 }, background: "radial-gradient(ellipse at 15% 15%, #c7e5ff 0%, transparent 48%), radial-gradient(ellipse at 90% 85%, #c8e8ff 0%, transparent 45%), #9dcdff" }}>
     <Container maxWidth={false} sx={{ maxWidth: { xs: 490, sm: 760, md: 1000 }, px: { xs: 1.5, sm: 3 } }}>
       <Paper elevation={0} sx={{ border: "5px solid #e7f3ff", borderRadius: { xs: "24px", md: "32px" }, px: { xs: 1.5, sm: 3, md: 4 }, pt: 1.5, pb: { xs: 2, md: 3 }, boxShadow: "0 24px 80px #1a6cba20", background: "linear-gradient(180deg,#fff,#fbfdff)" }}>
         <Stack component="header" direction="row" sx={{ justifyContent: "space-between", alignItems: "center", gap: 1, mb: { xs: 2, sm: 3 } }}>

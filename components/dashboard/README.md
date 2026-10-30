@@ -6,6 +6,8 @@ The `/dashboard` layout owns one persistent sidebar and a responsive mobile draw
 
 Achievements and notifications were added with user approval. The library has an honest empty state because no standalone library content exists yet. Speaking uses the existing recording exam; automated AI assessment remains unavailable until backend integration.
 
-The mobile drawer locally disables MUI's logical anchor inversion so its physical left edge and Slide transition match. The document and Persian text retain their RTL direction.
+The mobile drawer locally disables MUI's logical anchor inversion so its physical right edge and Slide transition match. The document and Persian text retain their RTL direction.
 
 The overview includes a shared sticky navigation bar, real search over routes/courses/exams/saved vocabulary, notifications, a sample daily-plan dialog, recommended courses, recent achievements and an interactive weekly chart. The navbar is part of the dashboard layout and remains present on every nested route. Statistics and planning data are explicitly marked as samples.
+
+The sidebar is on the right; Library and AI Speaking are not menu entries. The speaking exam remains reachable through Tests. Pages marked `data-dashboard-fill` stretch their main panel to the available content height using the shared flex layout, including the actual navbar height.

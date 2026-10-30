@@ -4,8 +4,6 @@ export const dashboardItems = [
   { id: "courses", label: "دوره‌ها", href: "/dashboard/courses", icon: "courses" },
   { id: "tests", label: "آزمون‌ها", href: "/dashboard/tests", icon: "tests" },
   { id: "exercises", label: "تمرین‌ها", href: "/dashboard/exercises", icon: "exercises" },
-  { id: "library", label: "کتابخانه", href: "/dashboard/library", icon: "library" },
-  { id: "speaking", label: "آزمون مکالمه (AI)", href: "/dashboard/speaking", icon: "speaking" },
   { id: "vocabulary", label: "واژگان", href: "/dashboard/vocabulary", icon: "vocabulary" },
   { id: "progress", label: "گزارش پیشرفت", href: "/dashboard/progress", icon: "progress" },
   { id: "favorites", label: "علاقه‌مندی‌ها", href: "/dashboard/favorites", icon: "favorites" },
@@ -38,7 +36,7 @@ export function dashboardHref(href: string) {
   return match ? `${match[1]}${href.slice(match[0].length)}` : href;
 }
 export function activeDashboardItem(path: string) {
-  if (path.startsWith("/dashboard/exam/speaking")) return "speaking";
+  if (path === "/dashboard/speaking" || path.startsWith("/dashboard/exam/speaking")) return "tests";
   if (path.startsWith("/dashboard/exam/") || path.startsWith("/dashboard/placement-test")) return "tests";
   if (path.startsWith("/dashboard/lesson")) return "courses";
   if (path.startsWith("/dashboard/profile/")) return "settings";
