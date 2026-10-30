@@ -32,6 +32,7 @@ export default function Home() {
             <Button component={Link} href={profile ? "/complete-profile" : "/login"} variant="contained" sx={{ minHeight: 48 }}>{profile ? "ویرایش پروفایل" : "شروع کنیم"}</Button>
             <Button component={Link} href="/progress" variant="outlined">گزارش پیشرفت</Button>
             <Button component={Link} href="/notifications" variant="outlined">اعلان‌ها و پیام‌ها</Button>
+            <Button component={Link} href="/subscription" variant="outlined">اشتراک و پرداخت</Button>
             <Button component={Link} href="/onboarding" endIcon={<ArrowBackRounded sx={{ mr: 1 }} />}>مرور معرفی لنگو</Button>
           </Stack>
         </Paper>
