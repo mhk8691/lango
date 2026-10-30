@@ -1,7 +1,8 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import Link from "@/components/AppLink";
-import { useId, useState } from "react";
+import { Suspense, useId, useState } from "react";
 import { Box, Button, Container, Paper, Stack, Tab, Tabs, Typography } from "@mui/material";
 import CourseCard, { type Course, type CourseLevel } from "@/components/course-card";
 
@@ -11,8 +12,12 @@ import { useCourseFavorites } from "@/lib/course-favorites";
 const levels = ["Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2"] as const;
 
 export default function Courses({ courses }: { courses: readonly Course[] }) {
+  return <Suspense fallback={<Typography sx={{ p: 3 }}>در حال آماده‌سازی دوره‌ها…</Typography>}><CourseCatalog courses={courses} /></Suspense>;
+}
+function CourseCatalog({ courses }: { courses: readonly Course[] }) {
+  const search = useSearchParams();
   const id = useId();
-  const [level, setLevel] = useState<CourseLevel | "all">("all");
+  const [level, setLevel] = useState<CourseLevel | "all">(() => { const initial = search.get("level"); return levels.find(item => item === initial) ?? "all"; });
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const favorites = useCourseFavorites();
   const visible = courses.filter(course => (level === "all" || course.levels.includes(level)) && (!favoritesOnly || favorites.includes(course.id)));

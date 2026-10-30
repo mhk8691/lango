@@ -1,0 +1,23 @@
+import { Box, Button, Chip, Paper, Stack, Typography } from "@mui/material";
+import CheckRounded from "@mui/icons-material/CheckRounded";
+import WorkspacePremiumRounded from "@mui/icons-material/WorkspacePremiumRounded";
+import Link from "@/components/AppLink";
+import { subscriptionPlans } from "@/lib/subscription-plans";
+import { HeadphonesIllustration } from "./LandingIllustrations";
+import { landingContainer, sectionTitle, sectionDescription, sectionSpace, blueButton } from "./styles";
+
+const plans = [subscriptionPlans[2], subscriptionPlans[1], subscriptionPlans[0]];
+const benefits = ["دسترسی به درس‌ها", "تمرین‌های تعاملی", "گزارش پیشرفت", "مرور واژه‌های دلخواه"];
+export default function PricingSection() {
+  return <Box component="section" id="pricing" sx={{ ...landingContainer, ...sectionSpace, textAlign: "center" }}><Typography component="h2" sx={sectionTitle}>پلن‌های اشتراک</Typography><Typography sx={{ ...sectionDescription, mb: 3 }}>طرح مناسب خودت را انتخاب کن و یادگیری را شروع کن.</Typography><Box sx={{ display: "grid", gridTemplateColumns: { xs: "minmax(0,1fr)", lg: "150px minmax(0,1fr) 160px" }, alignItems: "center", gap: 2, direction: "ltr" }}>
+    <Box aria-hidden="true" sx={{ display: { xs: "none", lg: "block" }, perspective: "700px", position: "relative" }}><Box sx={{ position: "absolute", inset: "-40px -30px -20px", bgcolor: "#e1efff", borderRadius: "50% 45% 60% 35%", transform: "rotate(-24deg)", opacity: 0.65 }} /><Paper elevation={0} sx={{ position: "relative", bgcolor: "#0d4c9d", background: "linear-gradient(135deg,#0e70d3,#09295e)", color: "#fff", py: 3.5, px: 2, borderRadius: "20px", transform: "rotateY(14deg) rotate(-9deg)", boxShadow: "8px 16px 25px #0a58b329" }}><WorkspacePremiumRounded sx={{ color: "#ffca4a", fontSize: 54, filter: "drop-shadow(0 4px 3px #0003)" }} /><Typography dir="rtl" sx={{ fontSize: 16, fontWeight: 800, lineHeight: 1.9, mt: 1 }}>با اشتراک لنگو<br />با هدف‌های بزرگ‌تر فکر کن</Typography></Paper></Box>
+    <Box sx={{ display: "grid", gridTemplateColumns: { xs: "minmax(0,1fr)", sm: "repeat(3,minmax(0,1fr))" }, gap: 1.5, alignItems: "stretch", pt: 1.5 }}>{plans.map(plan => {
+      const recommended = plan.id === "quarterly";
+      return <Paper component="article" key={plan.id} elevation={0} dir="rtl" sx={{ position: "relative", p: { xs: 2.5, md: 2 }, pb: 2, border: recommended ? "1.5px solid #0867ff" : "1px solid #e0eafb", borderRadius: "17px", bgcolor: "#fff", boxShadow: recommended ? "0 10px 25px #0867ff13" : "0 8px 24px #74a4d610", display: "flex", flexDirection: "column", minWidth: 0 }}>
+        {recommended && <Chip label="محبوب‌ترین" size="small" sx={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", bgcolor: "#0867ff", color: "#fff", fontSize: 10, px: 1, height: 25 }} />}
+        <Typography component="h3" sx={{ color: "#21385f", fontSize: 15, fontWeight: 800, mt: recommended ? 0.5 : 0 }}>{plan.label}</Typography><Typography sx={{ color: "#112852", fontSize: { xs: 32, sm: 27 }, fontWeight: 800, mt: 1 }}>{plan.price.toLocaleString("fa-IR")}</Typography><Typography sx={{ color: "#94a5be", fontSize: 10, mt: 0.5, mb: 2 }}>تومان / {plan.duration}</Typography><Stack component="ul" spacing={0.75} sx={{ listStyle: "none", p: 0, m: 0, mb: 2.5, textAlign: "right" }}>{benefits.map(benefit => <Stack component="li" key={benefit} direction="row" sx={{ gap: 0.75, alignItems: "flex-start" }}><CheckRounded sx={{ color: "#12c19a", fontSize: 17, flexShrink: 0 }} /><Typography sx={{ color: "#8295b1", fontSize: 11.5, lineHeight: 1.8 }}>{benefit}</Typography></Stack>)}</Stack><Button component={Link} href={`/dashboard/subscription?plan=${plan.id}`} variant={recommended ? "contained" : "outlined"} fullWidth aria-label={`انتخاب پلن ${plan.label}`} sx={{ ...(recommended ? blueButton : {}), mt: "auto", minHeight: 40, borderRadius: "9px", px: 1, fontSize: 12 }}>انتخاب پلن</Button>
+      </Paper>;
+    })}</Box>
+    <Box aria-hidden="true" sx={{ display: { xs: "none", lg: "block" }, position: "relative" }}><Box sx={{ position: "absolute", inset: "-20px -15px 10px", bgcolor: "#e2f0ff", borderRadius: "50% 45% 40% 55%", transform: "rotate(20deg)" }} /><Paper elevation={0} sx={{ position: "relative", p: 1.5, mx: 1, bgcolor: "#fff", borderRadius: "15px", transform: "rotate(-8deg)", mb: -3 }}><Typography lang="en" sx={{ color: "#1a3b6c", textAlign: "left", lineHeight: 1.3, fontWeight: 700, fontSize: 16 }}>Learn<br />Anywhere,<br />Anytime</Typography></Paper><HeadphonesIllustration /></Box>
+  </Box><Typography sx={{ color: "#99aac1", fontSize: 10.5, lineHeight: 2, mt: 2 }}>قیمت‌های نسخهٔ نمایشی؛ پرداخت آنلاین پس از اتصال درگاه فعال می‌شود.</Typography></Box>;
+}
