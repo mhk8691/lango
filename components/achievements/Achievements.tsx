@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, Button, ButtonBase, Container, IconButton, Paper, Stack, Typography } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import Modal from "@/components/Modal";

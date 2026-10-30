@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, Container, IconButton, Paper, Stack, Tab, Tabs, Typography } from "@mui/material";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import ProgressChart from "./ProgressChart";

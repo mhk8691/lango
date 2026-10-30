@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import Logo from "@/components/Logo";
 import {
   Box,

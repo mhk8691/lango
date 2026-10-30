@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Alert, Button, Chip, Stack, Typography } from "@mui/material";
 import TestResult from "@/components/test-result";
 import type { ExamResult } from "./types";

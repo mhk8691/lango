@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
 import ListeningExercise from "@/components/exercises/listening";

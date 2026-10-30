@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from "@/components/AppLink";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import { Alert, Avatar, Box, Button, Container, FormControl, FormControlLabel, IconButton, List, ListItem, ListItemButton, MenuItem, Paper, Select, Stack, Switch, Typography } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import { Alert, Box, Button, IconButton, InputAdornment, Stack, Tab, Tabs, Typography } from "@mui/material";
 import VisibilityRounded from "@mui/icons-material/VisibilityRounded";
 import VisibilityOffRounded from "@mui/icons-material/VisibilityOffRounded";

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { useId, useState } from "react";
 import { Box, Button, Container, Paper, Stack, Tab, Tabs, Typography } from "@mui/material";
 import CourseCard, { type Course, type CourseLevel } from "@/components/course-card";

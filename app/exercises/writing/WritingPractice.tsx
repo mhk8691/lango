@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import { Box, Container, Typography } from "@mui/material";
 import WritingExercise from "@/components/exercises/writing";
 

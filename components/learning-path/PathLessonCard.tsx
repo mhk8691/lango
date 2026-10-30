@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, ButtonBase, Typography } from "@mui/material";
 import CheckRounded from "@mui/icons-material/CheckRounded";
 import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";

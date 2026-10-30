@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import ExamRunner from "./ExamRunner";
 import { gradeDemoExam, placementDemoKey } from "@/lib/exams/demo-grading";
 import type { ExamDefinition, ExamSubmit } from "./types";

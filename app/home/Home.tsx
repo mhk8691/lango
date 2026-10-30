@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Avatar, Box, Button, Container, Paper, Stack, Typography } from "@mui/material";
 import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
@@ -30,6 +30,7 @@ export default function Home() {
           <Typography sx={{ color: "text.secondary", mt: 1.5, mb: 4, maxWidth: 530, lineHeight: 2 }}>این‌جا شروع مسیر یادگیری توئه؛ هر روز یه قدم کوچیک، به دنیایی بزرگ‌تر.</Typography>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ flexWrap: "wrap" }}>
             <Button component={Link} href={profile ? "/complete-profile" : "/login"} variant="contained" sx={{ minHeight: 48 }}>{profile ? "ویرایش پروفایل" : "شروع کنیم"}</Button>
+            <Button component={Link} href="/dashboard" variant="outlined">داشبورد من</Button>
             <Button component={Link} href="/progress" variant="outlined">گزارش پیشرفت</Button>
             <Button component={Link} href="/notifications" variant="outlined">اعلان‌ها و پیام‌ها</Button>
             <Button component={Link} href="/subscription" variant="outlined">اشتراک و پرداخت</Button>
@@ -38,6 +39,7 @@ export default function Home() {
             <Button component={Link} href="/lesson" variant="outlined">مشاهدهٔ درس</Button>
             <Button component={Link} href="/course" variant="outlined">دوره‌های آموزشی</Button>
             <Button component={Link} href="/favorites" variant="outlined">علاقه‌مندی‌ها</Button>
+            <Button component={Link} href="/vocabulary" variant="outlined">واژگان</Button>
             <Button component={Link} href="/learning-path" variant="outlined">مسیر یادگیری من</Button>
             <Button component={Link} href="/tests" variant="outlined">آزمون‌های زبان</Button>
             <Button component={Link} href="/onboarding" endIcon={<ArrowBackRounded sx={{ mr: 1 }} />}>مرور معرفی لنگو</Button>

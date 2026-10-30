@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Alert, Box, Button, Chip, Container, IconButton, Paper, Stack, Tab, Tabs, TextField, Typography } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 import StopRounded from "@mui/icons-material/StopRounded";
+import SaveLessonWordButton from "@/components/vocabulary/SaveLessonWordButton";
 import { lessons } from "./data";
 
 const tabs = ["گفت‌وگو", "تمرین‌ها", "واژگان", "گرامر", "شنیداری", "تکالیف"];
@@ -83,7 +84,7 @@ export default function Lesson() {
                   <Button size="small" onClick={() => setShowTranslation(value => !value)} aria-pressed={showTranslation} sx={{ alignSelf: "flex-start", fontSize: 11 }}>{showTranslation ? "پنهان کردن ترجمه" : "نمایش ترجمه"}</Button>
                 </Stack>}
                 {i === 1 && <Stack spacing={1.5}><Typography sx={{ color: "#314d7c", fontSize: 14 }}>آموخته‌های این درس را تمرین کن.</Typography><Button component={Link} href="/exercises/interactive" variant="outlined">تمرین چهارگزینه‌ای</Button><Button component={Link} href="/exercises/sentence-completion" variant="outlined">تکمیل جمله</Button><Button component={Link} href="/exercises/speaking" variant="outlined">تمرین مکالمه</Button></Stack>}
-                {i === 2 && <Stack component="dl" spacing={2} sx={{ m: 0 }}>{lesson.words.map((word, n) => <Stack key={word.word} direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 1, borderBottom: "1px solid #eff4fc", pb: 1 }}><Typography component="dd" sx={{ m: 0, color: "#7b8da9", fontSize: 13 }}>{word.meaning}</Typography><Stack direction="row" sx={{ alignItems: "center", gap: 1 }}><Typography component="dt" dir="ltr" lang="en" sx={{ color: "#203d71", fontWeight: 600 }}>{word.word}</Typography>{audioButton(`word-${n}`, word.word, word.word)}</Stack></Stack>)}</Stack>}
+                {i === 2 && <><Button component={Link} href="/vocabulary" size="small" sx={{ mb: 2, fontSize: 12 }}>مشاهدهٔ واژگان ذخیره‌شده</Button><Stack component="dl" spacing={2} sx={{ m: 0 }}>{lesson.words.map((word, n) => <Stack key={word.word} direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 1, borderBottom: "1px solid #eff4fc", pb: 1 }}><Typography component="dd" sx={{ m: 0, color: "#7b8da9", fontSize: 13 }}>{word.meaning}</Typography><Stack direction="row" sx={{ alignItems: "center", gap: 1 }}><Typography component="dt" dir="ltr" lang="en" sx={{ color: "#203d71", fontWeight: 600 }}>{word.word}</Typography>{audioButton(`word-${n}`, word.word, word.word)}<SaveLessonWordButton word={{ ...word, lesson: { id: lesson.id, title: lesson.subtitle } }} /></Stack></Stack>)}</Stack></>}
                 {i === 3 && <Typography sx={{ color: "#536b92", fontSize: 14, lineHeight: 2.4 }}>{lesson.grammar}</Typography>}
                 {i === 4 && <Stack spacing={2}><Typography sx={{ color: "#536b92", fontSize: 14, lineHeight: 2 }}>به گفت‌وگوی کامل گوش کن، سپس جمله‌ها را با صدای بلند تکرار کن.</Typography><Button variant="outlined" onClick={() => speak("full", lesson.dialogue.map(line => line.text).join(" "))}>{speaking === "full" ? "توقف گفت‌وگو" : "پخش گفت‌وگوی کامل"}</Button><Typography sx={{ color: "#8b9ab3", fontSize: 11 }}>خواندن متن با صدای انگلیسی مرورگر؛ دسترسی به صدا به مرورگر و دستگاه بستگی دارد.</Typography></Stack>}
                 {i === 5 && <Stack spacing={2}><Typography sx={{ fontSize: 14, color: "#536b92", lineHeight: 2 }}>{lesson.homework}</Typography><TextField multiline minRows={4} fullWidth label="پاسخ انگلیسی تو" value={drafts[lesson.id] ?? ""} onChange={event => setDrafts(previous => ({ ...previous, [lesson.id]: event.target.value }))} slotProps={{ htmlInput: { dir: "ltr", lang: "en", maxLength: 2000, style: { textAlign: "left" } } }} /><Typography sx={{ color: "#8b9ab3", fontSize: 11 }}>پاسخ تا زمان باز بودن صفحه نگه داشته می‌شود؛ ارسال به مدرس هنوز فعال نیست.</Typography></Stack>}

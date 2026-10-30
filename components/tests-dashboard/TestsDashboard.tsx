@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, Button, Container, Paper, Stack, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import Modal from "@/components/Modal";

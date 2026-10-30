@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Chip, Container, IconButton, LinearProgress, List, ListItem, Paper, Stack, Typography } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";

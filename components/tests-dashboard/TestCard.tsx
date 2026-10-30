@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, Button, Chip, Paper, Stack, Typography } from "@mui/material";
 import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
 import QuizOutlined from "@mui/icons-material/QuizOutlined";

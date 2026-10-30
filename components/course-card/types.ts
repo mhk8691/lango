@@ -12,6 +12,7 @@ export type CourseCardProps = {
   progress: number;
   href: string;
   actionLabel?: string;
+  compact?: boolean;
 };
 
 export type Course = CourseCardProps & {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter as useRouter } from "@/components/AppLink";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import AuthShell from "@/components/auth/AuthShell";
 import AvatarUpload from "@/components/auth/AvatarUpload";

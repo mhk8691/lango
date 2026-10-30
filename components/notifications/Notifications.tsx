@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/AppLink";
 import { Box, Button, Container, IconButton, List, ListItem, ListItemButton, Paper, Stack, Tab, Tabs, Typography } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import NotificationsNoneRounded from "@mui/icons-material/NotificationsNoneRounded";
