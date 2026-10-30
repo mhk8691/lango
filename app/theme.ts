@@ -362,6 +362,7 @@ const theme = createTheme(
       MuiFormHelperText: {
         styleOverrides: {
           root: {
+            textAlign: 'inherit',
             marginRight: 2,
             marginLeft: 2,
             fontSize: '0.72rem',

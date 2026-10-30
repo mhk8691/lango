@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import Modal from "@/components/Modal";
+import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 import {
   Box,
@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
 
 const slides = [
   {
@@ -52,8 +51,7 @@ type OnboardingProps = {
 
 export default function Onboarding({ onComplete, onLogin }: OnboardingProps) {
   const [activeStep, setActiveStep] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const [intent, setIntent] = useState<"start" | "login">("start");
+  const router = useRouter();
   const touchStart = useRef<number | null>(null);
   const slide = slides[activeStep];
   const isLast = activeStep === slides.length - 1;
@@ -61,8 +59,7 @@ export default function Onboarding({ onComplete, onLogin }: OnboardingProps) {
   function finish(mode: "start" | "login") {
     const action = mode === "login" ? onLogin : onComplete;
     if (action) return action();
-    setIntent(mode);
-    setFinished(true);
+    router.push("/login");
   }
 
   function next() {
@@ -362,41 +359,7 @@ export default function Onboarding({ onComplete, onLogin }: OnboardingProps) {
         </Typography>
       </Container>
 
-      <Modal
-        open={finished}
-        onClose={() => setFinished(false)}
-        maxWidth="xs"
-        title={
-          <>
-            <CheckCircleRounded
-              sx={{
-                color: "primary.main",
-                fontSize: 48,
-                display: "block",
-                mx: "auto",
-                mb: 1,
-              }}
-            />
-            {intent === "login" ? "خوش برگشتی!" : "آماده‌ای شروع کنی!"}
-          </>
-        }
-        titleProps={{ sx: { textAlign: "center", pt: 4 } }}
-        actionsProps={{ sx: { justifyContent: "center" } }}
-        actions={
-          <Button
-            onClick={() => {
-              setFinished(false);
-              setActiveStep(0);
-            }}
-          >
-            بازگشت به معرفی لنگو
-          </Button>
-        }
-      >
-        <Typography sx={{ textAlign: "center", color: "text.secondary" }}>
-          یه مسیر تازه برای یادگیری زبان، منتظر توئه.
-        </Typography>
-      </Modal>
+
     </Box>
   );
 }
