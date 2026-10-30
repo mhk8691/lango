@@ -59,7 +59,7 @@ export default function CompleteProfile({ currentYear }: { currentYear: number }
       firstName: values.firstName.trim(), lastName: values.lastName.trim(),
       email: values.email.trim(), phone: normalizePhone(values.phone), birthDate: date, avatar,
     };
-    try { saveProfile(profile); router.replace("/home"); }
+    try { saveProfile(profile); router.replace("/placement-test"); }
     catch { setStorageError(true); }
   }
   return (
@@ -78,7 +78,7 @@ export default function CompleteProfile({ currentYear }: { currentYear: number }
           </Box>
           <BirthDateField currentYear={currentYear} value={birthDate} onChange={(value) => { setBirthEdit(value); setErrors((previous) => ({ ...previous, birthDate: undefined })); }} error={errors.birthDate} />
         </Stack>
-        <Button type="submit" variant="contained" fullWidth disabled={avatarBusy} sx={{ mt: 3, mb: 1, minHeight: 49, background: "linear-gradient(180deg,#2287ff,#0760ff)" }}>{avatarBusy ? "در حال آماده‌سازی عکس…" : "ذخیره و ورود به لنگو"}</Button>
+        <Button type="submit" variant="contained" fullWidth disabled={avatarBusy} sx={{ mt: 3, mb: 1, minHeight: 49, background: "linear-gradient(180deg,#2287ff,#0760ff)" }}>{avatarBusy ? "در حال آماده‌سازی عکس…" : "ذخیره و ادامه"}</Button>
       </Box>
       <Modal open={storageError} onClose={() => setStorageError(false)} title="اطلاعات ذخیره نشد" maxWidth="xs" actions={<Button onClick={() => setStorageError(false)}>متوجه شدم</Button>}>
         <Typography sx={{ color: "text.secondary" }}>فضای ذخیره‌سازی مرورگر در دسترس نیست. دسترسی ذخیره‌سازی رو بررسی کن و دوباره تلاش کن؛ اطلاعات فرم همچنان اینجاست.</Typography>
