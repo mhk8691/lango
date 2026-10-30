@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Box,
   Button,
@@ -13,7 +14,6 @@ import {
 } from "@mui/material";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import Logo from "@/components/Logo";
-import Modal from "@/components/Modal";
 import PlacementIllustration from "./PlacementIllustration";
 
 const levels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
@@ -24,14 +24,14 @@ type PlacementIntroProps = {
 };
 
 export default function PlacementIntro({ onStart }: PlacementIntroProps) {
-  const [showNotice, setShowNotice] = useState(false);
+  const router = useRouter();
   const [selectedLevel, setSelectedLevel] = useState<PlacementLevel | null>(
     null,
   );
 
-  function start() {
-    if (onStart) onStart(selectedLevel);
-    else setShowNotice(true);
+  function start(level: PlacementLevel | null = selectedLevel) {
+    if (onStart) onStart(level);
+    else router.push(`/exam/placement${level ? `?level=${level}` : ""}`);
   }
 
   return (
@@ -130,10 +130,12 @@ export default function PlacementIntro({ onStart }: PlacementIntroProps) {
             </Box>
 
             <Box sx={{ gridArea: "content" }}>
+              <Typography id="placement-level-help" sx={{ color: "text.secondary", fontSize: 12, mb: 1.5, lineHeight: 2 }}>با انتخاب سطح تقریبی، مستقیم وارد آزمون می‌شوی. اگر سطح خودت را نمی‌دانی، «شروع آزمون» را بزن.</Typography>
               <Box
                 role="radiogroup"
                 dir="ltr"
                 aria-label="انتخاب سطح تقریبی زبان از A1 تا C2"
+                aria-describedby="placement-level-help"
                 sx={{
                   display: "grid",
                   gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
@@ -175,7 +177,7 @@ export default function PlacementIntro({ onStart }: PlacementIntroProps) {
                       name="placement-level"
                       value={level}
                       checked={selectedLevel === level}
-                      onChange={() => setSelectedLevel(level)}
+                      onChange={() => { setSelectedLevel(level); start(level); }}
                       sx={{
                         position: "absolute",
                         inset: 0,
@@ -208,7 +210,7 @@ export default function PlacementIntro({ onStart }: PlacementIntroProps) {
               <Button
                 variant="contained"
                 fullWidth
-                onClick={start}
+                onClick={() => start()}
                 sx={{
                   minHeight: 49,
                   fontSize: 15,
@@ -224,24 +226,6 @@ export default function PlacementIntro({ onStart }: PlacementIntroProps) {
         </Paper>
       </Container>
 
-      <Modal
-        open={showNotice}
-        onClose={() => setShowNotice(false)}
-        title="آزمون به‌زودی آماده می‌شود"
-        maxWidth="xs"
-        actions={
-          <Button onClick={() => setShowNotice(false)}>متوجه شدم</Button>
-        }
-      >
-        <Typography sx={{ color: "text.secondary" }}>
-          آزمون تعیین سطح به‌زودی در دسترس قرار می‌گیرد.
-        </Typography>
-        {selectedLevel && (
-          <Typography sx={{ mt: 1, color: "primary.main", fontSize: 14 }}>
-            سطح انتخابی شما: <bdi>{selectedLevel}</bdi>
-          </Typography>
-        )}
-      </Modal>
     </Box>
   );
 }

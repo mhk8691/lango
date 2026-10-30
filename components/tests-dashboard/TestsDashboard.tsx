@@ -34,7 +34,7 @@ export default function TestsDashboard() {
             </Tabs>
             <Box role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${category}`}><Box component="ul" aria-label="فهرست آزمون‌ها" sx={{ display: "grid", gridTemplateColumns: { xs: "minmax(0,1fr)", sm: "repeat(2,minmax(0,1fr))", md: "repeat(3,minmax(0,1fr))", lg: "repeat(3,minmax(0,1fr))", xl: "repeat(3,minmax(0,1fr))" }, gap: 1.5, p: 0, m: 0, listStyle: "none" }}>{visible.map(test => <Box component="li" key={test.id} sx={{ minWidth: 0 }}><TestCard test={test} /></Box>)}</Box></Box>
           </Paper>
-          <Typography sx={{ color: "#91a2bb", fontSize: 11, lineHeight: 2, mt: 1.5 }}>آمار، نتایج، زمان و تعداد سؤال‌ها نمونه‌اند. شروع آزمون مهارت‌ها فعلاً تمرین نمونه را باز می‌کند؛ ارزیابی کامل پس از اتصال بک‌اند فعال می‌شود.</Typography>
+          <Typography sx={{ color: "#91a2bb", fontSize: 11, lineHeight: 2, mt: 1.5 }}>آمار و نتایج اخیر نمونه‌اند. آزمون‌های فعال از صفحهٔ مشترک آزمون استفاده می‌کنند؛ ارزیابی نوشته و صدا پس از اتصال بک‌اند فعال می‌شود.</Typography>
         </Box>
         <Box sx={{ minWidth: 0, gridColumn: { lg: 1 }, gridRow: { lg: 1 } }}><TestsSidebar /></Box>
       </Box>

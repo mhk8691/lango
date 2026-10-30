@@ -16,6 +16,7 @@ export type SpeakingRecording = {
 export type SpeakingExerciseProps = {
   question: SpeakingQuestion;
   maxDurationSeconds?: number;
+  onBusyChange?: (busy: boolean) => void;
   onRecorded?: (recording: SpeakingRecording) => void;
   onContinue?: (recording: SpeakingRecording) => void;
   onExit?: () => void;

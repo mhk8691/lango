@@ -8,13 +8,13 @@ export type TestCategory = typeof categories[number]["id"];
 export type TestIcon = "placement" | "listening" | "reading" | "vocabulary" | "speaking" | "writing" | "grammar" | "mock" | "certificate";
 export type TestItem = { id: TestIcon; category: TestCategory; title: string; description: string; duration: string; format: string; href?: string; recommended?: boolean };
 export const tests: readonly TestItem[] = [
-  { id: "placement", category: "placement", title: "آزمون تعیین سطح", description: "سطح زبانت را بسنج و مسیر مناسب یادگیری را پیدا کن.", duration: "۴۰ دقیقه", format: "۶۰ سؤال", href: "/placement-test", recommended: true },
-  { id: "listening", category: "listening", title: "آزمون مهارت شنیداری", description: "درک شنیداری خود را با فایل‌های صوتی واقعی تقویت کن.", duration: "۲۵ دقیقه", format: "۳۰ سؤال", href: "/exercises/listening" },
-  { id: "reading", category: "reading", title: "آزمون مهارت خواندن", description: "درک مطلب و سرعت خواندن خود را بسنج.", duration: "۳۰ دقیقه", format: "۲۰ سؤال", href: "/exercises/interactive" },
-  { id: "writing", category: "writing", title: "آزمون مهارت نوشتن", description: "توانایی نوشتن خود را با موضوعات کاربردی ارزیابی کن.", duration: "۳۰ دقیقه", format: "۲ بخش", href: "/exercises/writing" },
-  { id: "speaking", category: "speaking", title: "آزمون مهارت مکالمه", description: "برای تمرین بیان و تلفظ، صدایت را ضبط و بازپخش کن.", duration: "۱۵ دقیقه", format: "تمرین صوتی", href: "/exercises/speaking" },
-  { id: "vocabulary", category: "vocabulary", title: "آزمون واژگان", description: "دامنهٔ واژگان خود را در موقعیت‌های مختلف بسنج.", duration: "۲۰ دقیقه", format: "۵۰ سؤال", href: "/exercises/sentence-completion" },
-  { id: "grammar", category: "grammar", title: "آزمون گرامر", description: "دانش گرامری خود را با جمله‌سازی و تمرین مرور کن.", duration: "۲۰ دقیقه", format: "۴۰ سؤال", href: "/exercises/drag-and-drop" },
+  { id: "placement", category: "placement", title: "آزمون تعیین سطح", description: "سطح زبانت را بسنج و مسیر مناسب یادگیری را پیدا کن.", duration: "بدون محدودیت", format: "۱۰ سؤال", href: "/placement-test", recommended: true },
+  { id: "listening", category: "listening", title: "آزمون مهارت شنیداری", description: "درک شنیداری خود را با فایل‌های صوتی واقعی تقویت کن.", duration: "بدون محدودیت", format: "۲ سؤال", href: "/exam/listening" },
+  { id: "reading", category: "reading", title: "آزمون مهارت خواندن", description: "درک مطلب و سرعت خواندن خود را بسنج.", duration: "بدون محدودیت", format: "۱ سؤال", href: "/exam/reading" },
+  { id: "writing", category: "writing", title: "آزمون مهارت نوشتن", description: "توانایی نوشتن خود را با موضوعات کاربردی ارزیابی کن.", duration: "بدون محدودیت", format: "۱ سؤال", href: "/exam/writing" },
+  { id: "speaking", category: "speaking", title: "آزمون مهارت مکالمه", description: "برای تمرین بیان و تلفظ، صدایت را ضبط و بازپخش کن.", duration: "بدون محدودیت", format: "۱ سؤال", href: "/exam/speaking" },
+  { id: "vocabulary", category: "vocabulary", title: "آزمون واژگان", description: "دامنهٔ واژگان خود را در موقعیت‌های مختلف بسنج.", duration: "بدون محدودیت", format: "۲ سؤال", href: "/exam/vocabulary" },
+  { id: "grammar", category: "grammar", title: "آزمون گرامر", description: "دانش گرامری خود را با جمله‌سازی و تمرین مرور کن.", duration: "بدون محدودیت", format: "۳ سؤال", href: "/exam/grammar" },
   { id: "mock", category: "placement", title: "آزمون شبیه‌سازی IELTS", description: "آمادگی برای ساختار و مهارت‌های آزمون آیلتس.", duration: "۶۰ دقیقه", format: "۴ بخش" },
   { id: "certificate", category: "placement", title: "آزمون دریافت مدرک", description: "ارزیابی نهایی و دریافت گواهی پس از تکمیل دوره.", duration: "۴۵ دقیقه", format: "ارزیابی نهایی" },
 ];

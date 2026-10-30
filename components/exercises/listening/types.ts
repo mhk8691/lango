@@ -9,7 +9,9 @@ export type ListeningQuestion = {
 };
 
 export type ListeningExerciseProps = {
-  question: ListeningQuestion;
+  /** Hides practice feedback/navigation when hosted by the shared exam runner. */
+  examMode?: boolean;
+  question: Omit<ListeningQuestion, "correctOptionId"> & { correctOptionId?: string };
   questionNumber: number;
   totalQuestions: number;
   selectedOptionId: string | null;

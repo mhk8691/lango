@@ -7,6 +7,7 @@ import CloseRounded from "@mui/icons-material/CloseRounded";
 
 type ExerciseFrameBaseProps = {
   children: ReactNode;
+  embedded?: boolean;
   questionNumber: number;
   totalQuestions: number;
   onExit?: () => void;
@@ -18,8 +19,9 @@ export type ExerciseFrameProps = ExerciseFrameBaseProps & (
   | { actions: Exclude<ReactNode, undefined>; hasAnswer?: never; onNext?: never; onPrevious?: never }
 );
 
-export default function ExerciseFrame({ children, questionNumber, totalQuestions, hasAnswer, onNext, onPrevious, onExit, progressColor = "primary", actions }: ExerciseFrameProps) {
+export default function ExerciseFrame({ embedded = false, children, questionNumber, totalQuestions, hasAnswer, onNext, onPrevious, onExit, progressColor = "primary", actions }: ExerciseFrameProps) {
   const progress = Math.min(100, Math.max(0, questionNumber / Math.max(totalQuestions, 1) * 100));
+  if (embedded) return <>{children}</>;
   return (
     <Paper elevation={0} sx={{ border: "4px solid #e7f3ff", borderRadius: { xs: "22px", md: "30px" }, p: { xs: 1.5, sm: 2.5, md: 3 }, boxShadow: "0 20px 64px #1a6cba18" }}>
       <Stack direction="row" sx={{ direction: "ltr", alignItems: "center", gap: { xs: 1.5, sm: 3 }, mb: { xs: 2, md: 3 } }}>

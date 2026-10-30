@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { Alert, Box, Button, CircularProgress, IconButton, Paper, Stack, Typography } from "@mui/material";
 import MicRounded from "@mui/icons-material/MicRounded";
 import StopRounded from "@mui/icons-material/StopRounded";
@@ -17,12 +17,13 @@ export default function SpeakingExercise(props: SpeakingExerciseProps) {
   return <Recorder key={props.question.id} {...props} />;
 }
 
-function Recorder({ question, maxDurationSeconds, onRecorded, onContinue, onExit }: SpeakingExerciseProps) {
+function Recorder({ onBusyChange, question, maxDurationSeconds, onRecorded, onContinue, onExit }: SpeakingExerciseProps) {
   const id = useId();
   const { status, recording, elapsed, level, error, start, stop, cancel, maxDuration } = useAudioRecorder({ maxDurationSeconds, onRecorded });
   const isRecording = status === "recording";
   const pending = status === "requesting" || status === "processing";
   const busy = pending || isRecording;
+  useEffect(() => { onBusyChange?.(busy); return () => onBusyChange?.(false); }, [busy, onBusyChange]);
   const canPreview = Boolean(recording) && !busy;
   const microphoneLabel = isRecording ? "توقف ضبط صدا" : pending ? "در حال آماده‌سازی میکروفون" : "شروع ضبط صدا";
   const statusMessage = status === "requesting" ? "اجازهٔ دسترسی به میکروفون را تأیید کن." : status === "processing" ? "در حال آماده‌سازی صدا…" : isRecording ? "در حال ضبط؛ برای توقف دوباره روی میکروفون بزن." : status === "recorded" ? "صدای شما ضبط شد." : "برای شروع، روی میکروفون بزنید.";

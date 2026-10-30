@@ -8,7 +8,9 @@ export type DragAndDropQuestion = {
 };
 
 export type DragAndDropExerciseProps = {
-  question: DragAndDropQuestion;
+  /** Hides practice feedback/navigation when hosted by the shared exam runner. */
+  examMode?: boolean;
+  question: Omit<DragAndDropQuestion, "correctOrder"> & { correctOrder?: readonly string[] };
   value: readonly string[];
   onChange: (order: string[]) => void;
   questionNumber: number;

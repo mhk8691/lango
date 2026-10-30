@@ -9,6 +9,7 @@ import ExerciseFeedback from "../shared/ExerciseFeedback";
 import type { InteractiveExerciseProps } from "./types";
 
 export default function InteractiveExercise({
+  examMode = false,
   question,
   questionNumber,
   totalQuestions,
@@ -25,7 +26,7 @@ export default function InteractiveExercise({
   const correctOption = question.options.find((option) => option.id === question.correctOptionId);
 
   return (
-    <ExerciseFrame questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={answered} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
+    <ExerciseFrame embedded={examMode} questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={answered} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
       <Box sx={{ p: { xs: 1.25, sm: 2, md: 3 }, borderRadius: "18px", bgcolor: "#fbfdff", border: "1px solid #edf3fa" }}>
         <Box dir="ltr" sx={{
           display: "grid",
@@ -42,11 +43,11 @@ export default function InteractiveExercise({
             {question.prompt}
           </Typography>
           <Box sx={{ gridArea: "options", minWidth: 0 }}>
-            <ExerciseOptions options={question.options} selectedOptionId={selectedOptionId} onSelect={onSelect} questionId={`${id}-question`} feedbackId={`${id}-feedback`} correctOptionId={question.correctOptionId} revealAnswer={answered} locked={answered} />
+            <ExerciseOptions options={question.options} selectedOptionId={selectedOptionId} onSelect={onSelect} questionId={`${id}-question`} feedbackId={examMode ? undefined : `${id}-feedback`} correctOptionId={question.correctOptionId} revealAnswer={!examMode && answered} locked={!examMode && answered} />
           </Box>
         </Box>
 
-        <ExerciseFeedback id={`${id}-feedback`} correct={answered ? correct : null} correctAnswer={correctOption?.text} explanation={question.explanation} />
+        {!examMode && <ExerciseFeedback id={`${id}-feedback`} correct={answered ? correct : null} correctAnswer={correctOption?.text} explanation={question.explanation} />}
       </Box>
 
     </ExerciseFrame>

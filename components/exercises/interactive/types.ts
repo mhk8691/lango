@@ -12,7 +12,9 @@ export type InteractiveQuestion = {
 };
 
 export type InteractiveExerciseProps = {
-  question: InteractiveQuestion;
+  /** Hides practice feedback/navigation when hosted by the shared exam runner. */
+  examMode?: boolean;
+  question: Omit<InteractiveQuestion, "correctOptionId"> & { correctOptionId?: string };
   questionNumber: number;
   totalQuestions: number;
   selectedOptionId: string | null;

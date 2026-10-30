@@ -13,6 +13,8 @@ export type WritingFeedback = {
 };
 
 export type WritingExerciseProps = {
+  /** Hides practice feedback/navigation when hosted by the shared exam runner. */
+  examMode?: boolean;
   question: WritingQuestion;
   value: string;
   onChange: (value: string) => void;

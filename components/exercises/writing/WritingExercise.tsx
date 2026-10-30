@@ -12,7 +12,7 @@ export default function WritingExercise(props: WritingExerciseProps) {
   return <Editor key={props.question.id} {...props} />;
 }
 
-function Editor({ question, value, onChange, questionNumber = 1, totalQuestions = 1, onExit, onReview }: WritingExerciseProps) {
+function Editor({ examMode = false, question, value, onChange, questionNumber = 1, totalQuestions = 1, onExit, onReview }: WritingExerciseProps) {
   const id = useId();
   const request = useRef<AbortController | null>(null);
   const [busy, setBusy] = useState(false);
@@ -55,7 +55,7 @@ function Editor({ question, value, onChange, questionNumber = 1, totalQuestions 
 
   return (
     <>
-      <ExerciseFrame
+      <ExerciseFrame embedded={examMode}
         questionNumber={questionNumber} totalQuestions={totalQuestions} progressColor="warning"
         onExit={onExit ? () => { cancel(); onExit(); } : undefined}
         actions={

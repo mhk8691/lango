@@ -11,7 +11,9 @@ export type SentenceCompletionQuestion = {
 };
 
 export type SentenceCompletionExerciseProps = {
-  question: SentenceCompletionQuestion;
+  /** Hides practice feedback/navigation when hosted by the shared exam runner. */
+  examMode?: boolean;
+  question: Omit<SentenceCompletionQuestion, "correctOptionId"> & { correctOptionId?: string };
   questionNumber: number;
   totalQuestions: number;
   selectedOptionId: string | null;

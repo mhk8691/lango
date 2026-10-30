@@ -8,7 +8,7 @@ import ExerciseOptions from "../shared/ExerciseOptions";
 import ExerciseFeedback from "../shared/ExerciseFeedback";
 import type { SentenceCompletionExerciseProps } from "./types";
 
-export default function SentenceCompletionExercise({ question, questionNumber, totalQuestions, selectedOptionId, onSelect, onNext, onPrevious, onExit }: SentenceCompletionExerciseProps) {
+export default function SentenceCompletionExercise({ examMode = false, question, questionNumber, totalQuestions, selectedOptionId, onSelect, onNext, onPrevious, onExit }: SentenceCompletionExerciseProps) {
   const id = useId();
   const selected = question.options.find((option) => option.id === selectedOptionId);
   const answered = Boolean(selected);
@@ -16,7 +16,7 @@ export default function SentenceCompletionExercise({ question, questionNumber, t
   const correctOption = question.options.find((option) => option.id === question.correctOptionId);
 
   return (
-    <ExerciseFrame questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={answered} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
+    <ExerciseFrame embedded={examMode} questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={answered} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
       <Box sx={{ p: { xs: 1, sm: 2, md: 3 }, borderRadius: "18px", bgcolor: "#fbfdff", border: "1px solid #edf3fa" }}>
         <Typography dir="ltr" lang="en" sx={{ textAlign: "center", color: "#7585a3", fontSize: { xs: 12, sm: 14, md: 15 }, lineHeight: 1.8, mb: 2 }}>
           {question.instruction ?? "Look at the picture and complete the sentence."}
@@ -30,11 +30,11 @@ export default function SentenceCompletionExercise({ question, questionNumber, t
           sx={{ textAlign: "center", color: "#142354", fontSize: { xs: 14, sm: 17, md: 20 }, fontWeight: 500, lineHeight: 2, mt: 1.5, mb: 2 }}
         >
           {question.sentence.before}{" "}
-          <Box component="span" sx={{ display: "inline-block", minWidth: { xs: 45, sm: 64 }, px: 0.5, borderBottom: "1px solid", borderColor: !answered ? "#94a7c8" : correct ? "#15ad7d" : "#df6073", color: !answered ? "inherit" : correct ? "#099668" : "#cf5265", fontWeight: answered ? 700 : 400 }}>{selected?.text ?? "_____"}</Box>
+          <Box component="span" sx={{ display: "inline-block", minWidth: { xs: 45, sm: 64 }, px: 0.5, borderBottom: "1px solid", borderColor: examMode || !answered ? "#94a7c8" : correct ? "#15ad7d" : "#df6073", color: examMode || !answered ? "inherit" : correct ? "#099668" : "#cf5265", fontWeight: answered ? 700 : 400 }}>{selected?.text ?? "_____"}</Box>
           {" "}{question.sentence.after}
         </Typography>
-        <ExerciseOptions options={question.options} selectedOptionId={selectedOptionId} onSelect={onSelect} questionId={`${id}-sentence`} feedbackId={`${id}-feedback`} correctOptionId={question.correctOptionId} revealAnswer={answered} locked={answered} />
-        <ExerciseFeedback id={`${id}-feedback`} correct={answered ? correct : null} correctAnswer={correctOption?.text} explanation={question.explanation} />
+        <ExerciseOptions options={question.options} selectedOptionId={selectedOptionId} onSelect={onSelect} questionId={`${id}-sentence`} feedbackId={examMode ? undefined : `${id}-feedback`} correctOptionId={question.correctOptionId} revealAnswer={!examMode && answered} locked={!examMode && answered} />
+        {!examMode && <ExerciseFeedback id={`${id}-feedback`} correct={answered ? correct : null} correctAnswer={correctOption?.text} explanation={question.explanation} />}
       </Box>
     </ExerciseFrame>
   );

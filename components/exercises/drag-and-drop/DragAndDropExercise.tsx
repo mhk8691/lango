@@ -17,7 +17,7 @@ export default function DragAndDropExercise(props: DragAndDropExerciseProps) {
   return <WordSorter key={props.question.id} {...props} />;
 }
 
-function WordSorter({ question, value, onChange, questionNumber, totalQuestions, onNext, onPrevious, onExit }: DragAndDropExerciseProps) {
+function WordSorter({ examMode = false, question, value, onChange, questionNumber, totalQuestions, onNext, onPrevious, onExit }: DragAndDropExerciseProps) {
   const id = useId();
   const bankRef = useRef<HTMLDivElement | null>(null);
   const answerRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +28,7 @@ function WordSorter({ question, value, onChange, questionNumber, totalQuestions,
   const tokensById = new Map(question.tokens.map((token) => [token.id, token]));
   const answer = order.map((tokenId) => tokensById.get(tokenId)!);
   const complete = order.length === question.tokens.length;
-  const correct = complete && isCorrectOrder(question.tokens, order, question.correctOrder);
+  const correct = complete && isCorrectOrder(question.tokens, order, question.correctOrder ?? []);
   const draggedToken = dragView ? tokensById.get(dragView.id) : null;
 
   function focusToken(tokenId: string, zone: Zone) {
@@ -140,7 +140,7 @@ function WordSorter({ question, value, onChange, questionNumber, totalQuestions,
   }
 
   return (
-    <ExerciseFrame questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={complete} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
+    <ExerciseFrame embedded={examMode} questionNumber={questionNumber} totalQuestions={totalQuestions} hasAnswer={complete} onNext={onNext} onPrevious={onPrevious} onExit={onExit} progressColor="warning">
       <Box sx={{ p: { xs: 1, sm: 2, md: 3 }, borderRadius: "18px", bgcolor: "#fbfdff", border: "1px solid #edf3fa" }}>
         <Typography component="h2" dir="ltr" lang="en" sx={{ textAlign: "center", color: "#7585a3", fontSize: { xs: 13, sm: 16, md: 18 }, lineHeight: 1.8, fontWeight: 500, mb: 3 }}>
           {question.instruction ?? "Put the words in the correct order."}
@@ -156,10 +156,10 @@ function WordSorter({ question, value, onChange, questionNumber, totalQuestions,
           <Typography sx={{ fontSize: 10.5, color: "#9aa7bd" }}>با کلیک هم می‌تونی کلمه‌ها رو بچینی.</Typography>
           <Button size="small" disabled={!order.length} onClick={() => { onChange([]); setAnnouncement("جمله پاک شد."); focusToken(question.tokens[0].id, "bank"); }} sx={{ flexShrink: 0, minWidth: 45, fontSize: 11, "&.Mui-disabled": { bgcolor: "transparent" } }}>از نو</Button>
         </Stack>
-        <Stack role="status" aria-live="polite" aria-atomic="true" direction="row" spacing={1} sx={{ minHeight: 40, mt: 0.5, alignItems: "center", justifyContent: complete ? "flex-start" : "center", color: complete ? correct ? "#0aaa76" : "#d35f71" : "#99a6bd" }}>
+        {!examMode && <Stack role="status" aria-live="polite" aria-atomic="true" direction="row" spacing={1} sx={{ minHeight: 40, mt: 0.5, alignItems: "center", justifyContent: complete ? "flex-start" : "center", color: complete ? correct ? "#0aaa76" : "#d35f71" : "#99a6bd" }}>
           {complete && (correct ? <CheckCircleRounded sx={{ fontSize: 23, flexShrink: 0 }} /> : <CancelRounded sx={{ fontSize: 23, flexShrink: 0 }} />)}
           <Typography sx={{ fontSize: { xs: 11.5, sm: 13 } }}>{complete ? correct ? "آفرین! جمله درست است." : "ترتیب جمله درست نیست؛ کلمه‌ها را جابه‌جا کن." : "همهٔ کلمه‌ها را در جمله قرار بده."}</Typography>
-        </Stack>
+        </Stack>}
         <Box role="status" aria-live="polite" aria-atomic="true" sx={visuallyHidden}>{announcement}</Box>
       </Box>
       {dragView && draggedToken && <Portal><Box aria-hidden="true" dir="ltr" style={{ left: Math.max(50, Math.min(window.innerWidth - 50, dragView.x)), top: Math.max(24, Math.min(window.innerHeight - 24, dragView.y)) }} sx={{ position: "fixed", transform: "translate(-50%, -50%)", zIndex: 1500, pointerEvents: "none", px: 2, py: 1.25, bgcolor: "white", color: "#126bdf", border: "1px solid #83baff", borderRadius: "9px", fontSize: 16, fontWeight: 700, boxShadow: "0 7px 24px #1371d833" }}>{draggedToken.text}</Box></Portal>}
