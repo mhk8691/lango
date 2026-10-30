@@ -36,6 +36,7 @@ export default function Home() {
             <Button component={Link} href="/achievements" variant="outlined">دستاوردها</Button>
             <Button component={Link} href="/profile" variant="outlined">پروفایل و تنظیمات</Button>
             <Button component={Link} href="/lesson" variant="outlined">مشاهدهٔ درس</Button>
+            <Button component={Link} href="/course" variant="outlined">دوره‌های آموزشی</Button>
             <Button component={Link} href="/onboarding" endIcon={<ArrowBackRounded sx={{ mr: 1 }} />}>مرور معرفی لنگو</Button>
           </Stack>
         </Paper>

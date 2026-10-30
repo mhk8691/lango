@@ -1,0 +1,41 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Chip, Container, IconButton, LinearProgress, List, ListItem, Paper, Stack, Typography } from "@mui/material";
+import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
+import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
+import CheckRounded from "@mui/icons-material/CheckRounded";
+import PlayCircleOutlineRounded from "@mui/icons-material/PlayCircleOutlineRounded";
+import MenuBookRounded from "@mui/icons-material/MenuBookRounded";
+import LayersOutlined from "@mui/icons-material/LayersOutlined";
+import FavoriteCourseButton from "@/components/course/FavoriteCourseButton";
+import type { Course } from "@/components/course-card";
+import type { CourseDetails } from "@/app/course/data";
+
+export default function CourseDetail({ course, details }: { course: Course; details: CourseDetails }) {
+  const count = details.chapters.reduce((total, chapter) => total + chapter.lessons.length, 0);
+  return <Box component="main" sx={{ minHeight: "100dvh", py: { xs: 1.5, sm: 4 }, background: "radial-gradient(ellipse at 15% 15%, #d6efff 0%, transparent 50%), #acd8ff" }}>
+    <Container maxWidth={false} sx={{ maxWidth: 1160, px: { xs: 1, sm: 3 } }}>
+      <Paper elevation={0} sx={{ border: "5px solid #e5f3ff", borderRadius: { xs: "23px", md: "30px" }, px: { xs: 2, sm: 3, md: 4 }, pt: 1.5, pb: { xs: 3, md: 4 }, background: "linear-gradient(180deg,#fff,#f9fcff)", boxShadow: "0 20px 65px #2d77ba1a" }}>
+        <Stack component="header" direction="row" sx={{ alignItems: "center", justifyContent: "space-between", mb: 2 }}><Typography sx={{ color: "#617b9e", fontSize: 13 }}>دوره‌های زبان انگلیسی / جزئیات دوره</Typography><IconButton component={Link} href="/course" aria-label="بازگشت به دوره‌ها" sx={{ width: 44, height: 44, color: "#27466f" }}><ArrowBackRounded sx={{ fontSize: 20 }} /></IconButton></Stack>
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "minmax(0,1fr)", md: "minmax(0,1.2fr) minmax(0,1fr)" }, alignItems: "center", gap: { xs: 3, md: 5 } }}>
+          <Box sx={{ minWidth: 0 }}>
+            <Chip label={`سطح ${course.levelLabel}`} sx={{ bgcolor: "#e7f2ff", color: "#0875f3", borderRadius: 2, mb: 1.5 }} />
+            <Typography component="h1" lang="en" dir="ltr" sx={{ fontSize: { xs: 32, sm: 40, md: 46 }, color: "#122954", fontWeight: 800, lineHeight: 1.2, textAlign: "right", overflowWrap: "anywhere" }}>{course.title}</Typography>
+            <Typography sx={{ fontSize: { xs: 15, sm: 18 }, color: "#627d9e", lineHeight: 2, mt: 1.5 }}>{course.description}</Typography>
+            <Stack direction="row" sx={{ flexWrap: "wrap", gap: 2, my: 2.5, color: "#6e86a5" }}><Stack direction="row" sx={{ gap: 0.75, alignItems: "center" }}><LayersOutlined sx={{ fontSize: 19 }} /><Typography sx={{ fontSize: 12 }}>{details.chapters.length.toLocaleString("fa-IR")} فصل</Typography></Stack><Stack direction="row" sx={{ gap: 0.75, alignItems: "center" }}><MenuBookRounded sx={{ fontSize: 19 }} /><Typography sx={{ fontSize: 12 }}>{count.toLocaleString("fa-IR")} عنوان آموزشی</Typography></Stack><Typography sx={{ fontSize: 12 }}>آموزش همراه با تمرین</Typography></Stack>
+            <Box sx={{ p: 2, border: "1px solid #e2edfc", borderRadius: 3, mb: 2.5, bgcolor: "#f6faff" }}><Stack direction="row" sx={{ justifyContent: "space-between", gap: 1, mb: 1 }}><Typography sx={{ color: "#647f9f", fontSize: 12 }}>پیشرفت دوره</Typography><Typography sx={{ color: "#1775e0", fontWeight: 700, fontSize: 13 }}>{course.progress.toLocaleString("fa-IR")}٪</Typography></Stack><LinearProgress variant="determinate" value={course.progress} aria-label="پیشرفت دوره" sx={{ height: 7, borderRadius: 5, bgcolor: "#e0edff", "& .MuiLinearProgress-bar": { bgcolor: "#ffb52c", borderRadius: 5, transition: "none" } }} /></Box>
+            <Stack sx={{ gap: 1.25 }}><Button component={Link} href="/lesson" variant="contained" sx={{ minHeight: 48, borderRadius: "11px", gap: 1, fontWeight: 700 }}><PlayCircleOutlineRounded sx={{ fontSize: 21 }} />مشاهدهٔ درس نمونه</Button><FavoriteCourseButton courseId={course.id} title={course.title} /></Stack>
+          </Box>
+          <Box sx={{ position: "relative", aspectRatio: { xs: "16 / 11", md: "1" }, borderRadius: "20px", overflow: "hidden", bgcolor: "#e9f3ff", order: { xs: -1, md: 1 } }}><Image src={course.image} alt={course.imageAlt} fill priority sizes="(max-width: 899px) 90vw, 460px" style={{ objectFit: "cover" }} /><Box sx={{ position: "absolute", bottom: 16, right: 16, borderRadius: 2, px: 1.5, py: 0.75, bgcolor: "#fffffff0", color: "#23446b", fontSize: 12 }}>هر روز، یک قدم به جلو</Box></Box>
+        </Box>
+        <Box component="section" aria-labelledby="course-overview" sx={{ mt: { xs: 4, md: 5 } }}><Typography component="h2" id="course-overview" sx={{ fontSize: 21, color: "#19365f", fontWeight: 800, mb: 1.5 }}>دربارهٔ این دوره</Typography><Typography sx={{ color: "#6c83a1", fontSize: 14, lineHeight: 2.3 }}>{details.overview}</Typography></Box>
+        <Box component="section" aria-labelledby="course-outcomes" sx={{ mt: 3.5, p: { xs: 2, sm: 3 }, bgcolor: "#f0f7ff", borderRadius: 4 }}><Typography component="h2" id="course-outcomes" sx={{ fontSize: 20, color: "#19365f", fontWeight: 800, mb: 2 }}>در این دوره چه یاد می‌گیری؟</Typography><Box component="ul" sx={{ display: "grid", gridTemplateColumns: { xs: "minmax(0,1fr)", sm: "repeat(2,minmax(0,1fr))" }, gap: 2, listStyle: "none", p: 0, m: 0 }}>{details.outcomes.map(outcome => <Stack component="li" key={outcome} direction="row" sx={{ gap: 1, alignItems: "flex-start" }}><CheckRounded sx={{ fontSize: 21, color: "#00bb80", flexShrink: 0 }} /><Typography sx={{ fontSize: 13, color: "#5e7a9b", lineHeight: 1.9 }}>{outcome}</Typography></Stack>)}</Box></Box>
+        <Box component="section" aria-labelledby="course-curriculum" sx={{ mt: 4 }}><Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", gap: 1, mb: 1 }}><Typography component="h2" id="course-curriculum" sx={{ fontSize: 21, color: "#19365f", fontWeight: 800 }}>سرفصل‌های دوره</Typography><Typography sx={{ color: "#8a9cb4", fontSize: 12 }}>{count.toLocaleString("fa-IR")} عنوان</Typography></Stack><Typography sx={{ color: "#8a9cb4", fontSize: 12, lineHeight: 2, mb: 2 }}>این نسخه شامل سرفصل‌ها و یک پیش‌نمایش نمونه است؛ سایر درس‌ها به‌زودی اضافه می‌شوند. درصد پیشرفت فعلاً نمایشی است.</Typography>
+          {details.chapters.map((chapter, chapterIndex) => <Accordion key={chapter.title} defaultExpanded={chapterIndex === 0} disableGutters elevation={0} sx={{ border: "1px solid #e3edfa", borderRadius: "13px !important", mb: 1.5, overflow: "hidden", "&:before": { display: "none" } }}><AccordionSummary expandIcon={<ExpandMoreRounded />} id={`chapter-${chapterIndex}-header`} aria-controls={`chapter-${chapterIndex}-content`} sx={{ bgcolor: "#f6faff", px: { xs: 1.5, sm: 2.5 }, minHeight: 64 }}><Stack direction="row" sx={{ alignItems: "center", gap: 1.25 }}><Box component="span" sx={{ display: "grid", placeItems: "center", width: 30, height: 30, bgcolor: "#e4efff", borderRadius: 2, color: "#1680fa", fontSize: 13, flexShrink: 0 }}>{(chapterIndex + 1).toLocaleString("fa-IR")}</Box><Typography component="h3" sx={{ fontSize: { xs: 13, sm: 15 }, color: "#38577e", fontWeight: 700 }}>{chapter.title}</Typography></Stack></AccordionSummary><AccordionDetails sx={{ px: { xs: 1.5, sm: 2.5 }, py: 0 }}><List disablePadding>{chapter.lessons.map((lesson, lessonIndex) => <ListItem key={lesson.title} disablePadding sx={{ py: 1.5, gap: 1, borderBottom: "1px solid #edf3fb", "&:last-child": { borderBottom: 0 } }}><Typography sx={{ color: "#9cacc1", fontSize: 11 }}>{(lessonIndex + 1).toLocaleString("fa-IR")}</Typography><Typography sx={{ flex: 1, color: "#617c9e", fontSize: 13 }}>{lesson.title}</Typography>{lesson.preview ? <Button component={Link} href="/lesson" size="small" sx={{ minHeight: 40, flexShrink: 0 }}>پیش‌نمایش</Button> : <Typography sx={{ fontSize: 10, color: "#95a6bb", flexShrink: 0 }}>به‌زودی</Typography>}</ListItem>)}</List></AccordionDetails></Accordion>)}
+        </Box>
+      </Paper>
+    </Container>
+  </Box>;
+}
