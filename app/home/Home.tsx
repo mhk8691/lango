@@ -28,8 +28,9 @@ export default function Home() {
           {profile && <Typography sx={{ display: "flex", alignItems: "center", gap: 1, color: "success.main", fontSize: 13, mb: 2 }}><CheckCircleRounded sx={{ fontSize: 19 }} />پروفایلت آماده‌ست</Typography>}
           <Typography component="h1" sx={{ fontWeight: 800, color: "#13204f", fontSize: { xs: 27, md: 40 }, lineHeight: 1.8 }}>{profile ? `سلام ${profile.firstName}، خوش اومدی!` : "به لنگو خوش اومدی!"}</Typography>
           <Typography sx={{ color: "text.secondary", mt: 1.5, mb: 4, maxWidth: 530, lineHeight: 2 }}>این‌جا شروع مسیر یادگیری توئه؛ هر روز یه قدم کوچیک، به دنیایی بزرگ‌تر.</Typography>
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ flexWrap: "wrap" }}>
             <Button component={Link} href={profile ? "/complete-profile" : "/login"} variant="contained" sx={{ minHeight: 48 }}>{profile ? "ویرایش پروفایل" : "شروع کنیم"}</Button>
+            <Button component={Link} href="/progress" variant="outlined">گزارش پیشرفت</Button>
             <Button component={Link} href="/onboarding" endIcon={<ArrowBackRounded sx={{ mr: 1 }} />}>مرور معرفی لنگو</Button>
           </Stack>
         </Paper>
