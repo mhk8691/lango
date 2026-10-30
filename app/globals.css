@@ -1,33 +1,7 @@
 @layer theme, base, mui, components, utilities;
-@import "tailwindcss";
 
 :root {
   --background: #f6f9fd;
   --foreground: #172b4d;
   --font-lango: "Roboto", var(--font-mikhak), sans-serif;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-lango);
-  --font-mono: ui-monospace, monospace, var(--font-mikhak);
-}
-
-@layer base {
-  body {
-    margin: 0;
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-lango);
-  }
-
-  button, input, textarea, select {
-    font: inherit;
-  }
-
-  [dir="ltr"] {
-    direction: ltr;
-    unicode-bidi: isolate;
-  }
 }

@@ -174,18 +174,19 @@ const theme = createTheme(
 
     components: {
       MuiCssBaseline: {
-        styleOverrides: {
+        styleOverrides: (theme) => ({
           '*': {
             boxSizing: 'border-box',
           },
           html: {
-            direction: 'rtl',
+            direction: theme.direction,
             scrollBehavior: 'smooth',
             WebkitFontSmoothing: 'antialiased',
             MozOsxFontSmoothing: 'grayscale',
           },
           body: {
-            direction: 'rtl',
+            direction: 'inherit',
+            textAlign: theme.direction === 'rtl' ? 'right' : 'left',
             margin: 0,
             backgroundColor: langoColors.background.default,
             color: langoColors.text.primary,
@@ -204,6 +205,12 @@ const theme = createTheme(
           },
           '[dir="ltr"]': {
             direction: 'ltr',
+            textAlign: 'left',
+            unicodeBidi: 'isolate',
+          },
+          '[dir="rtl"]': {
+            direction: 'rtl',
+            textAlign: 'right',
             unicodeBidi: 'isolate',
           },
           '.lango-scrollbar': {
@@ -218,6 +225,19 @@ const theme = createTheme(
             background: '#CBD5E1',
             borderRadius: 999,
           },
+        }),
+      },
+
+      MuiStack: {
+        defaultProps: {
+          // Native gaps work in both directions without mirrored margins.
+          useFlexGap: true,
+        },
+      },
+
+      MuiTypography: {
+        defaultProps: {
+          align: 'inherit',
         },
       },
 
